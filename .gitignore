@@ -3,6 +3,8 @@
 *.lo
 *.o
 *.obj
+unsuccessfulbuild
+*.lastbuildstate
 
 # Precompiled Headers
 *.gch
@@ -23,7 +25,19 @@
 *.a
 *.lib
 
+# Logs
+*.log
+*.tlog
+
 # Executables
 *.exe
 *.out
 *.app
+
+# Visual Studio files
+*.sln
+*.VC.db
+*.suo
+*.vcxproj*
+*.idb
+*.pdb
