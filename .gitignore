@@ -44,3 +44,4 @@ unsuccessfulbuild
 *.rc
 *.make
 *.aps
+*.opendb
