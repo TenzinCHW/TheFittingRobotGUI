@@ -2,65 +2,92 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	gui.setup();
-	gui.add(radius.setup("radius", 140, 10, 300));
-	MyModel.loadModel("TestForRobotGUI/one.3ds", 20);
-	MyModel.setPosition(ofGetWidth()*0.5, ofGetHeight()*0.5, -100);
-	//MyModel.setRotation();
+	sizeControl.setup("Size");
+	sizeControl.add(Hip.setup("Hip cm", 20, 20, 50));
+	sizeControl.add(Thigh.setup("Thigh cm", 20, 20, 40));
+	sizeControl.add(Calf.setup("Calf cm", 15, 15, 30));
+	//fileToLoad = "Permutations/H1/T1/C1.obj";
+	std::cout << fileToLoad + "\n";
+	MyModel.setPosition(0, 200, 0);
+	sender.addListener(this, &ofApp::senderPressed);
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (20 <= Hip && Hip <= 26) {
+		hipstring.assign(hipsizes[0]);
+	}
+	else if (27 <= Hip && Hip <= 32) {
+		hipstring.assign(hipsizes[1]);
+	}
+	else if (33 <= Hip && Hip <= 37) {
+		hipstring.assign(hipsizes[1]);
+	}
+	else if (38 <= Hip && Hip <= 44) {
+		hipstring.assign(hipsizes[3]);
+	}
+	else {
+		hipstring.assign(hipsizes[4]);
+	}
+
+	if (20 <= Thigh && Thigh <= 23) {
+		thighstring.assign(thighsizes[0]);
+	}
+	else if (24 <= Thigh && Thigh <= 28) {
+		thighstring.assign(thighsizes[1]);
+	}
+	else if (29 <= Thigh && Thigh <= 32) {
+		thighstring.assign(thighsizes[1]);
+	}
+	else if (33 <= Thigh && Thigh <= 37) {
+		thighstring.assign(thighsizes[3]);
+	}
+	else {
+		thighstring.assign(thighsizes[4]);
+	}
+
+	if (15 <= Calf && Calf <= 17) {
+		calfstring.assign(calfsizes[0]);
+	}
+	else if (18 <= Calf && Calf <= 20) {
+		calfstring.assign(calfsizes[1]);
+	}
+	else if (21 <= Calf && Calf <= 24) {
+		calfstring.assign(calfsizes[1]);
+	}
+	else if (25 <= Calf && Calf <= 28) {
+		calfstring.assign(calfsizes[3]);
+	}
+	else {
+		calfstring.assign(calfsizes[4]);
+	}
+
+	fileToLoad.assign("Permutations/" + hipstring + "/" + thighstring + "/" + calfstring + ".obj");
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	gui.draw();
+	sizeControl.draw();
 	cam.begin();
 
-	if (radius > 170) {
-		MyModel.clear();
-		MyModel.loadModel("TestForRobotGUI/two.3ds", 20);
-		MyModel.setPosition(0, 0, -100);
+
+	MyModel.clear();
+	MyModel.loadModel(fileToLoad, 0);
+	MyModel.setPosition(0, 200, 0);
+	MyModel.setRotation(2, 0, 0, 180, 0);
 
 
-		//glPushMatrix();
+	ofSetColor(255, 255, 255, 255);
+	MyModel.drawFaces();
 
-		//draw in middle of the screen
-		//glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0);
-		//tumble according to mouse
-		//glRotatef(-mouseY, 1, 0, 0);
-		//glRotatef(mouseX, 0, 1, 0);
-		//glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0);
-
-		ofSetColor(255, 255, 255, 255);
-		MyModel.drawWireframe();
-
-		//glPopMatrix();
-
-	}
-	else
-	{
-		MyModel.clear();
-		MyModel.loadModel("TestForRobotGUI/one.3ds", 20);
-		MyModel.setPosition(0, 0, -100);
-		
-		//glPushMatrix();
-
-		//draw in middle of the screen
-		//glTranslatef(ofGetWidth() / 2, ofGetHeight() / 2, 0);
-		//tumble according to mouse
-		//glRotatef(-mouseY, 1, 0, 0);
-		//glRotatef(mouseX, 0, 1, 0);
-		//glTranslatef(-ofGetWidth() / 2, -ofGetHeight() / 2, 0);
-
-		ofSetColor(255, 255, 255, 255);
-		MyModel.drawWireframe();
-
-		//glPopMatrix();
-	}
 	cam.end();
+}
+
+//--------------------------------------------------------------
+void ofApp::senderPressed() {
+	//meow.get()   TODO HTTP request
 }
 
 //--------------------------------------------------------------
