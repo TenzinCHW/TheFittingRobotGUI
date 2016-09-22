@@ -8,6 +8,7 @@
 class ofApp : public ofBaseApp{
 
 	public:
+		ofxIntSlider Waist;
 		ofxIntSlider Hip;
 		ofxIntSlider Thigh;
 		ofxIntSlider Calf;
@@ -16,13 +17,19 @@ class ofApp : public ofBaseApp{
 		ofxAssimpModelLoader MyModel;
 		ofURLFileLoader meow;
 
+		string waiststring;
 		string hipstring;
 		string thighstring;
 		string calfstring;
 		string fileToLoad;
-		string hipsizes[5] = { "H1", "H2", "H3", "H4", "H5" };
-		string thighsizes[5] = { "T1", "T2", "T3", "T4", "T5" };
-		string calfsizes[5] = { "C1", "C2", "C3", "C4", "C5" };
+		int minmaxWaist[2] = { 23, 40 };
+		int minmaxHip[2] = { 25, 48 };
+		int minmaxThigh[2] = { 18, 28 };
+		int minmaxCalf[2] = { 12, 24 };
+		string waistsizes[5] = { "W1", "W2", "W3", "W4", "W5" };
+		string hipsizes[9] = { "H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9" };
+		string thighsizes[9] = { "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9" };
+		string calfsizes[9] = { "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9" };
 
 		ofEasyCam cam;
 

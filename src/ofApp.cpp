@@ -3,9 +3,10 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	sizeControl.setup("Size");
-	sizeControl.add(Hip.setup("Hip cm", 20, 20, 50));
-	sizeControl.add(Thigh.setup("Thigh cm", 20, 20, 40));
-	sizeControl.add(Calf.setup("Calf cm", 15, 15, 30));
+	sizeControl.add(Waist.setup("Waist cm", minmaxWaist[0], minmaxWaist[0], minmaxWaist[1]));
+	sizeControl.add(Hip.setup("Hip cm", minmaxHip[0], minmaxHip[0], minmaxHip[1]));
+	sizeControl.add(Thigh.setup("Thigh cm", minmaxThigh[0], minmaxThigh[0], minmaxThigh[1]));
+	sizeControl.add(Calf.setup("Calf cm", minmaxCalf[0], minmaxCalf[0], minmaxCalf[1]));
 	//fileToLoad = "Permutations/H1/T1/C1.obj";
 	std::cout << fileToLoad + "\n";
 	MyModel.setPosition(0, 200, 0);
@@ -15,6 +16,10 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+
+
+
 	if (20 <= Hip && Hip <= 26) {
 		hipstring.assign(hipsizes[0]);
 	}
@@ -80,7 +85,7 @@ void ofApp::draw(){
 
 
 	ofSetColor(255, 255, 255, 255);
-	MyModel.drawFaces();
+	MyModel.drawWireframe();
 
 	cam.end();
 }
